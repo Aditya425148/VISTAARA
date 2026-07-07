@@ -8,7 +8,7 @@ const defaultApiUrl = typeof window !== 'undefined'
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL || defaultApiUrl,
-  timeout: 2500
+  timeout: 15000
 });
 
 api.interceptors.request.use((config) => {
