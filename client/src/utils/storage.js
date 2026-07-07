@@ -1,0 +1,13 @@
+export const readStorage = (key, fallback) => {
+  try {
+    const value = localStorage.getItem(key);
+    return value ? JSON.parse(value) : fallback;
+  } catch {
+    localStorage.removeItem(key);
+    return fallback;
+  }
+};
+
+export const writeStorage = (key, value) => {
+  localStorage.setItem(key, JSON.stringify(value));
+};
