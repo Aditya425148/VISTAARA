@@ -28,7 +28,10 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async (credentia
     const { data } = await api.post('/auth/google', { credential });
     return data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || 'Could not sign in with Google.');
+    if (error.code === 'ECONNABORTED') {
+      throw new Error('Google sign-in is taking too long. Try again after the server wakes up.');
+    }
+    throw new Error(error.response?.data?.message || 'Could not reach the Google sign-in API.');
   }
 });
 
